@@ -9,18 +9,20 @@ export default class GeojsonService {
         this.projService = new ProjService();
     }
 
-    handle(geojson, headers) {
-        this.from = headers.from;
-        this.to = headers.to;
+    handle(geojson, query) {
+        this.from = query.from;
+        this.to = query.to;
 
         if (geojson.features) {
             for (let f of geojson.features) {
-                this.convertGeometry(f.geometry)
+                this.convertGeometry(f.geometry);;
+            }
+        } else if (geojson.geometry.geometries) {
+            for (let f of geojson.geometry.geometries) {
+                this.convertGeometry(f);
             }
         } else {
-            for (let f of geojson.geometry.geometries) {
-                this.convertGeometry(f)
-            }
+            this.convertGeometry(geojson.geometry);
         }
 
         return geojson;

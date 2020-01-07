@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    $.ajax({
+      type: "POST",
+      url: `/convert?from=${$("#from").find(":selected").text()}&to=${$("#to").find(":selected").text()}`,
+      data: $("#payload").val(),
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      success: function(data) {
+        $("#output").val(JSON.stringify(data, undefined, 2))
+      }
+    });
+  });
+});
+</script>
+</head>
+<body style="text-align: center">
+<div>
+z <select id="from" style="margin: 10px">
+  <option value="PUWG_2000_5">PUWG_2000_5</option>
+  <option value="PUWG_2000_6">PUWG_2000_6</option>
+  <option value="PUWG_2000_7">PUWG_2000_7</option>
+  <option value="PUWG_2000_8">PUWG_2000_8</option>
+  <option value="WGS_84">WGS_84</option>
+</select>
+</div>
+
+<div>
+do <select id="to" style="margin: 10px">
+  <option value="PUWG_2000_5">PUWG_2000_5</option>
+  <option value="PUWG_2000_6">PUWG_2000_6</option>
+  <option value="PUWG_2000_7">PUWG_2000_7</option>
+  <option value="PUWG_2000_8">PUWG_2000_8</option>
+  <option value="WGS_84">WGS_84</option>
+</select>
+</div>
+
+<div style="margin: 10px 0">
+<textarea id="payload" rows="15" cols="40">
+</textarea>
+</div>
+
+<button>Konwertuj</button>
+
+<div style="margin: 10px 0">
+<textarea id="output" rows="15" cols="40">
+</textarea>
+</div>
+
+</body>
+</html>
