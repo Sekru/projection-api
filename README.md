@@ -1,6 +1,7 @@
 # projection-api
 
 headers: from, to
+body: geojson
 
 PUWG_2000_5,
 PUWG_2000_6,
